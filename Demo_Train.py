@@ -138,6 +138,9 @@ def train(dataset, image_embed_size, word_embed_size, rnn_hidden_size, latent_si
     optimizer = tf.train.MomentumOptimizer(learning_rate, momentum).minimize(loss)
 
     sess = tf.Session()
+    sess.__enter__()
+    tf.set_random_seed(456)
+    np.random.seed(123)
     sess.run(tf.initialize_all_variables())
 
     saver = tf.train.Saver(write_version=tf.train.SaverDef.V1, max_to_keep=300)
